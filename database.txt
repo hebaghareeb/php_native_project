@@ -1,0 +1,24 @@
+creat database frniture;
+*********************************************************
+create TABLE users (id int primary key AUTO_INCREMENT, fname varchar(50), uname varchar(50) UNIQUE,
+ email varchar(50) UNIQUE,active char,pass varchar(50)  );
+*********************************************************************************
+CREATE table category(id int primary key AUTO_INCREMENT, name varchar(50));
+***************************************************************************************
+CREATE table furniture(id int primary key,title varchar(50),descr varchar(250),small varchar(50),large varchar(50),
+price numeric, active char, image varchar(50),cat int, FOREIGN KEY  (cat) REFERENCES  category(id)  );
+*****************************************************************************************************
+create VIEW fur_cat AS
+select furniture.title, category.name
+from furniture,category
+where category.id = furniture.cat;
+****************************************************************************************************
+select furniture.cat, category.id
+from furniture,category
+where category.id = furniture.cat
+GROUP BY category.id;
+********************************************************************************************
+select category.id , COUNT(furniture.cat) as count
+from furniture,category
+where category.id = furniture.cat
+GROUP BY category.id;
